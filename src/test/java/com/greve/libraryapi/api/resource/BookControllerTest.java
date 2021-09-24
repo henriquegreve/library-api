@@ -5,6 +5,7 @@ import com.greve.libraryapi.api.dto.BookDTO;
 import com.greve.libraryapi.model.entity.Book;
 import com.greve.libraryapi.exception.BusinessException;
 import com.greve.libraryapi.service.BookService;
+import com.greve.libraryapi.service.LoanService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,9 @@ public class BookControllerTest {
 
     @MockBean
     BookService service;
+
+    @MockBean
+    LoanService loanService;
 
     @Test
     @DisplayName("Deve criar um livro com sucesso.")
@@ -264,5 +268,4 @@ public class BookControllerTest {
     private BookDTO createNewBook() {
         return BookDTO.builder().author("Artur").title("As Aventuras").isbn("001").build();
     }
-
 }
