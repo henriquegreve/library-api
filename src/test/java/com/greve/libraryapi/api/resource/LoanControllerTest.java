@@ -31,7 +31,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +59,7 @@ public class LoanControllerTest {
     @DisplayName("Deve realizar um emprestimo.")
     public void createLoanTest() throws Exception{
 
-        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        LoanDTO dto = LoanDTO.builder().isbn("123").email("customer@email.com").customer("Fulano").build();
         String json = new ObjectMapper().writeValueAsString(dto);
 
         Book book = Book.builder().id(1L).isbn("123").build();
@@ -169,14 +168,14 @@ public class LoanControllerTest {
     @DisplayName("Deve filtrar empréstimos")
     public void findLoansTest() throws Exception{
         //cenário
-        Long id = 1l;
+        Long id = 1L;
         Loan loan = LoanServiceTest.createLoan();
         loan.setId(id);
         Book book = Book.builder().id(id).isbn("321").build();
         loan.setBook(book);
 
         BDDMockito.given( loanService.find( Mockito.any(LoanFilterDTO.class), Mockito.any(Pageable.class)) )
-                .willReturn( new PageImpl<Loan>( Arrays.asList(loan), PageRequest.of(0,10), 1 ) );
+                .willReturn(new PageImpl<>(List.of(loan), PageRequest.of(0, 10), 1) );
 
         String queryString = String.format("?isbn=%s&customer=%s&page=0&size=10",
                 book.getIsbn(), loan.getCustomer());
