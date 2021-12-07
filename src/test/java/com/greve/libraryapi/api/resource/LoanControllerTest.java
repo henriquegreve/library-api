@@ -31,6 +31,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -175,7 +176,7 @@ public class LoanControllerTest {
         loan.setBook(book);
 
         BDDMockito.given( loanService.find( Mockito.any(LoanFilterDTO.class), Mockito.any(Pageable.class)) )
-                .willReturn(new PageImpl<>(List.of(loan), PageRequest.of(0, 10), 1) );
+                .willReturn(new PageImpl<>(Arrays.asList(loan), PageRequest.of(0, 10), 1) );
 
         String queryString = String.format("?isbn=%s&customer=%s&page=0&size=10",
                 book.getIsbn(), loan.getCustomer());
