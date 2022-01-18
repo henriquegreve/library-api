@@ -24,8 +24,8 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public Loan save(Loan loan) {
-        if( repository.existsByBookAndNotReturned(loan.getBook()) ) {
+    public Loan save( Loan loan ) {
+        if( repository.existsByBookAndNotReturned(loan.getBook()) ){
             throw new BusinessException("Book already loaned");
         }
         return repository.save(loan);
@@ -43,7 +43,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public Page<Loan> find(LoanFilterDTO filterDTO, Pageable pageable) {
-        return repository.findByBookIsbnOrCustomer(filterDTO.getIsbn(), filterDTO.getCustomer(), pageable);
+        return repository.findByBookIsbnOrCustomer( filterDTO.getIsbn(), filterDTO.getCustomer(), pageable );
     }
 
     @Override
@@ -55,6 +55,6 @@ public class LoanServiceImpl implements LoanService {
     public List<Loan> getAllLateLoans() {
         final Integer loanDays = 4;
         LocalDate threeDaysAgo = LocalDate.now().minusDays(loanDays);
-        return repository.findbyLoanDateLessThanAndNotReturned(threeDaysAgo);
+        return repository.findByLoanDateLessThanAndNotReturned(threeDaysAgo);
     }
 }

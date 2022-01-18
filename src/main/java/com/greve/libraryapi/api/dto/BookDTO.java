@@ -1,6 +1,5 @@
 package com.greve.libraryapi.api.dto;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -21,4 +20,5 @@ public class BookDTO {
 
     @NotEmpty
     private String isbn;
+
 }

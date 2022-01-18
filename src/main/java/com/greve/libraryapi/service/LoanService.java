@@ -12,15 +12,16 @@ import java.util.Optional;
 
 public interface LoanService {
 
-    Loan save(Loan loan);
+    Loan save( Loan loan );
 
     Optional<Loan> getById(Long id);
 
     Loan update(Loan loan);
 
-    Page<Loan> find(LoanFilterDTO filter, Pageable pageable);
+    Page<Loan> find(LoanFilterDTO filterDTO, Pageable pageable);
 
-    Page<Loan> getLoansByBook(Book book, Pageable pageable);
+    Page<Loan> getLoansByBook( Book book, Pageable pageable);
 
     List<Loan> getAllLateLoans();
+
 }

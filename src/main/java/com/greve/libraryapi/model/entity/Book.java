@@ -10,8 +10,8 @@ import java.util.List;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 public class Book {
@@ -30,6 +30,7 @@ public class Book {
     @Column
     private String isbn;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany( mappedBy = "book" )
     private List<Loan> loans;
+
 }

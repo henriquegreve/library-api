@@ -1,6 +1,6 @@
 package com.greve.libraryapi.api;
 
-import com.greve.libraryapi.api.exception.ApiErrors;
+import com.greve.libraryapi.api.exception.ApiErros;
 import com.greve.libraryapi.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,19 +16,19 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleValidationExceptions(MethodArgumentNotValidException ex){
+    public ApiErros handleValidationExceptions(MethodArgumentNotValidException ex){
         BindingResult bindingResult = ex.getBindingResult();
-        return new ApiErrors(bindingResult);
+        return new ApiErros(bindingResult);
     }
 
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleBusinnesException(BusinessException ex){
-        return new ApiErrors(ex);
+    public ApiErros handleBusinessException(BusinessException ex){
+        return new ApiErros(ex);
     }
 
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity handleResponseStatusException(ResponseStatusException ex) {
-        return new ResponseEntity(new ApiErrors(ex), ex.getStatus());
+    public ResponseEntity handleResponseStatusException( ResponseStatusException ex ){
+        return new ResponseEntity(new ApiErros(ex), ex.getStatus());
     }
 }

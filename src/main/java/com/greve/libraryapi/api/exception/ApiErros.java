@@ -8,23 +8,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ApiErrors {
+public class ApiErros {
     private List<String> errors;
 
-    public ApiErrors(BindingResult bindingResult){
+    public ApiErros(BindingResult bindingResult) {
         this.errors = new ArrayList<>();
-        bindingResult.getAllErrors().forEach(error -> this.errors.add(error.getDefaultMessage()));
+        bindingResult.getAllErrors().forEach( error -> this.errors.add(error.getDefaultMessage())  );
     }
 
-    public ApiErrors(BusinessException ex) {
+    public ApiErros(BusinessException ex) {
         this.errors = Arrays.asList(ex.getMessage());
     }
 
-    public ApiErrors(ResponseStatusException ex) {
+    public ApiErros(ResponseStatusException ex) {
         this.errors = Arrays.asList(ex.getReason());
     }
 
-    public List<String> getErrors(){
+    public List<String> getErrors() {
         return errors;
     }
 }

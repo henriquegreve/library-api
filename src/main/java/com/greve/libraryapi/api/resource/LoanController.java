@@ -4,6 +4,7 @@ import com.greve.libraryapi.api.dto.BookDTO;
 import com.greve.libraryapi.api.dto.LoanDTO;
 import com.greve.libraryapi.api.dto.LoanFilterDTO;
 import com.greve.libraryapi.api.dto.ReturnedLoanDTO;
+import com.greve.libraryapi.exception.BusinessException;
 import com.greve.libraryapi.model.entity.Book;
 import com.greve.libraryapi.model.entity.Loan;
 import com.greve.libraryapi.service.BookService;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -35,9 +35,10 @@ public class LoanController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Long create(@RequestBody LoanDTO dto) {
-        Book book = bookService.getBookByIsbn(dto.getIsbn())
+        Book book = bookService
+                .getBookByIsbn(dto.getIsbn())
                 .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.BAD_REQUEST, "Book not found for passed isbn."));
+                        new ResponseStatusException(HttpStatus.BAD_REQUEST, "Book not found for passed isbn"));
         Loan entity = Loan.builder()
                 .book(book)
                 .customer(dto.getCustomer())
@@ -49,8 +50,10 @@ public class LoanController {
     }
 
     @PatchMapping("{id}")
-    public void returnBook(@PathVariable Long id, @RequestBody ReturnedLoanDTO dto) {
-        Loan loan = service.getById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
+    public void returnBook(
+            @PathVariable Long id,
+            @RequestBody ReturnedLoanDTO dto) {
+        Loan loan = service.getById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         loan.setReturned(dto.getReturned());
         service.update(loan);
     }
@@ -72,5 +75,4 @@ public class LoanController {
                 }).collect(Collectors.toList());
         return new PageImpl<LoanDTO>(loans, pageRequest, result.getTotalElements());
     }
-
 }

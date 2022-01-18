@@ -2,7 +2,6 @@ package com.greve.libraryapi.service;
 
 import com.greve.libraryapi.model.entity.Loan;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.ValueGenerationType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class ScheduleService {
     private final EmailService emailService;
 
     @Scheduled(cron = CRON_LATE_LOANS)
-    public void sendMailToLateLoans() {
+    public void sendMailToLateLoans(){
         List<Loan> allLateLoans = loanService.getAllLateLoans();
         List<String> mailsList = allLateLoans.stream()
                 .map(loan -> loan.getCustomerEmail())
@@ -32,5 +31,4 @@ public class ScheduleService {
         emailService.sendMails(message, mailsList);
 
     }
-
 }
