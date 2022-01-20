@@ -1,4 +1,4 @@
 # library-api
 Projeto da API de biblioteca
 
-[![<ORG_NAME>](https://circleci.com/gh/henriquegreve/library-api.svg?style=svg)](https://app.circleci.com/pipelines/github/henriquegreve/library-api?branch=master&filter=all)
+[![CircleCI](https://circleci.com/gh/henriquegreve/library-api/tree/master.svg?style=svg)](https://circleci.com/gh/henriquegreve/library-api/tree/master)
