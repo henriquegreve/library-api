@@ -1,4 +1,4 @@
 # library-api
 Projeto da API de biblioteca
 
-[![CircleCI](https://circleci.com/gh/henriquegreve/library-api/tree/master.svg?style=svg)](https://circleci.com/gh/henriquegreve/library-api/tree/master)
+[![Build Status](https://dev.azure.com/henriquegreve/Library-API/_apis/build/status/henriquegreve.library-api?branchName=master)](https://dev.azure.com/henriquegreve/Library-API/_build/latest?definitionId=2&branchName=master)
